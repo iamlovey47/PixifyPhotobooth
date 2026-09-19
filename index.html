@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Pixify — Your Photos</title>
+<title>Pixify Photobooth</title>
 <style>
   :root{
     --bg:#0f1115;
@@ -63,7 +63,7 @@
 <body>
 <div class="card">
 
-  <div class="brand">Pixify</div>
+  <div class="brand">Pixify Photobooth</div>
 
   <!-- STEP 1 -->
   <div class="step active" id="step1">
@@ -83,6 +83,7 @@
     <a class="btn btn-primary"
        href="https://drive.google.com/drive/folders/1olI60uBWR5qxuh9-bg6oEdbCI5iEQorW?usp=sharing"
        target="_blank" rel="noopener">Open my photos</a>
+    <button class="btn btn-ghost" id="backBtn" type="button">← Back</button>
     <p class="note">Tip: bookmark this page so you can get back to your gallery anytime.</p>
   </div>
 
@@ -94,11 +95,18 @@
   var step2 = document.getElementById('step2');
   var reviewBtn = document.getElementById('reviewBtn');
   var skipBtn = document.getElementById('skipBtn');
+  var backBtn = document.getElementById('backBtn');
 
   function showPhotos(){
     step1.classList.remove('active');
     step2.classList.add('active');
     try { localStorage.setItem('pixify_done','1'); } catch(e){}
+  }
+
+  function showReview(){
+    step2.classList.remove('active');
+    step1.classList.add('active');
+    try { localStorage.removeItem('pixify_done'); } catch(e){}
   }
 
   // Returning visitors go straight to their photos.
@@ -110,6 +118,7 @@
   });
 
   skipBtn.addEventListener('click', showPhotos);
+  backBtn.addEventListener('click', showReview);
 })();
 </script>
 </body>
